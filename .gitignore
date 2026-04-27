@@ -1,0 +1,13 @@
+node_modules
+**/node_modules
+dist
+**/dist
+.env
+**/.env
+.DS_Store
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+ecommerce-app.zip
+
