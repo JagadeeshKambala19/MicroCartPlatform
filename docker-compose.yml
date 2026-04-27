@@ -11,6 +11,59 @@ services:
       - mysql_data:/var/lib/mysql
       - ./db/init.sql:/docker-entrypoint-initdb.d/001-init.sql:ro
 
+  auth-service:
+    build: ./services/auth-service
+    ports:
+      - "4001:4001"
+    depends_on:
+      - mysql
+    env_file:
+      - .env
+    environment:
+      - PORT=4001
+
+  product-service:
+    build: ./services/product-service
+    ports:
+      - "4002:4002"
+    depends_on:
+      - mysql
+    env_file:
+      - .env
+    environment:
+      - PORT=4002
+
+  cart-service:
+    build: ./services/cart-service
+    ports:
+      - "4003:4003"
+    depends_on:
+      - mysql
+    env_file:
+      - .env
+    environment:
+      - PORT=4003
+
+  order-service:
+    build: ./services/order-service
+    ports:
+      - "4004:4004"
+    depends_on:
+      - mysql
+    env_file:
+      - .env
+    environment:
+      - PORT=4004
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - auth-service
+      - product-service
+      - cart-service
+      - order-service
+
 volumes:
   mysql_data:
-
