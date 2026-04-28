@@ -3,6 +3,10 @@ node_modules
 dist
 **/dist
 .env
+# Terraform directories and state
+.terraform/
+terraform.tfstate
+terraform.tfstate.*
 **/.env
 .DS_Store
 npm-debug.log*
