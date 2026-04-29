@@ -42,3 +42,9 @@ resource "aws_ecr_lifecycle_policy" "repos_policy" {
     ]
   })
 }
+module "vpc" {
+  source = "./modules/vpc"
+
+  project_name = "microcart"
+  environment  = "dev"
+}
