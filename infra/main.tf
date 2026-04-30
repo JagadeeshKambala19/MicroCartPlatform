@@ -48,3 +48,11 @@ module "vpc" {
   project_name = "microcart"
   environment  = "dev"
 }
+
+module "iam" {
+  source = "./modules/iam"
+
+  project_name        = "microcart"
+  environment         = "dev"
+  ecr_repository_arns = [for repo in aws_ecr_repository.repos : repo.arn]
+}
