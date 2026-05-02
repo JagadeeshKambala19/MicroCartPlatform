@@ -73,3 +73,21 @@ resource "aws_ecs_task_definition" "app" {
     }
   ])
 }
+resource "aws_ecs_service" "app" {
+  name            = "${var.project_name}-${var.environment}-service"
+  cluster         = aws_ecs_cluster.main.id
+  task_definition = aws_ecs_task_definition.app.arn
+
+  desired_count = var.desired_count
+  launch_type   = "FARGATE"
+
+  network_configuration {
+    subnets          = var.private_subnet_ids
+    security_groups  = [aws_security_group.ecs.id]
+    assign_public_ip = false
+  }
+
+  depends_on = [
+    aws_cloudwatch_log_group.ecs
+  ]
+}
