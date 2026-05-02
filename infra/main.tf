@@ -56,3 +56,25 @@ module "iam" {
   environment         = "dev"
   ecr_repository_arns = [for repo in aws_ecr_repository.repos : repo.arn]
 }
+
+module "ecs" {
+  source = "./modules/ecs"
+
+  project_name = "microcart"
+  environment  = "dev"
+
+  vpc_id             = module.vpc.vpc_id
+  private_subnet_ids = module.vpc.private_subnet_ids
+
+  ecs_execution_role_arn = module.iam.ecs_execution_role_arn
+  ecs_task_role_arn      = module.iam.ecs_task_role_arn
+
+  # pick one repo to start (e.g. frontend)
+container_image = "${aws_ecr_repository.repos["frontend"].repository_url}:latest"
+
+  container_port = 3000
+
+  environment_variables = {
+    NODE_ENV = "production"
+  }
+}
