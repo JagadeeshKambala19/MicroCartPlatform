@@ -73,6 +73,7 @@ module "ecs" {
 container_image = "${aws_ecr_repository.repos["frontend"].repository_url}:latest"
 
   container_port = 3000
+  target_group_arn = module.alb.target_group_arn
 
   environment_variables = {
     NODE_ENV = "production"
