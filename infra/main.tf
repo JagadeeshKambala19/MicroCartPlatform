@@ -78,3 +78,13 @@ container_image = "${aws_ecr_repository.repos["frontend"].repository_url}:latest
     NODE_ENV = "production"
   }
 }
+
+module "alb" {
+  source = "./modules/alb"
+
+  project_name = "microcart"
+  environment  = "dev"
+
+  vpc_id            = module.vpc.vpc_id
+  public_subnet_ids = module.vpc.public_subnet_ids
+}
