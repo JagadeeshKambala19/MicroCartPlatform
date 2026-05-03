@@ -68,3 +68,7 @@ variable "environment_variables" {
   type        = map(string)
   default     = {}
 }
+variable "target_group_arn" {
+  description = "ALB target group ARN"
+  type        = string
+}

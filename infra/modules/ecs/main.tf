@@ -78,6 +78,7 @@ resource "aws_ecs_service" "app" {
   cluster         = aws_ecs_cluster.main.id
   task_definition = aws_ecs_task_definition.app.arn
 
+
   desired_count = var.desired_count
   launch_type   = "FARGATE"
 
@@ -87,6 +88,11 @@ resource "aws_ecs_service" "app" {
     assign_public_ip = false
   }
 
+load_balancer {
+  target_group_arn = var.target_group_arn
+  container_name   = "app"
+  container_port   = var.container_port
+}
   depends_on = [
     aws_cloudwatch_log_group.ecs
   ]
