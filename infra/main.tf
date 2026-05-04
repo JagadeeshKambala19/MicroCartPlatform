@@ -69,14 +69,18 @@ module "ecs" {
   ecs_execution_role_arn = module.iam.ecs_execution_role_arn
   ecs_task_role_arn      = module.iam.ecs_task_role_arn
 
-  # pick one repo to start (e.g. frontend)
-container_image = "${aws_ecr_repository.repos["frontend"].repository_url}:latest"
+  container_image = "${aws_ecr_repository.repos["frontend"].repository_url}:latest"
 
-  container_port = 3000
+  container_port   = 3000
   target_group_arn = module.alb.target_group_arn
 
   environment_variables = {
     NODE_ENV = "production"
+
+    DB_HOST     = module.rds.db_endpoint
+    DB_NAME     = module.rds.db_name
+    DB_USER     = var.db_username
+    DB_PASSWORD = var.db_password
   }
 }
 
