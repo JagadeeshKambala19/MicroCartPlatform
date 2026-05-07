@@ -3,10 +3,6 @@ node_modules
 dist
 **/dist
 .env
-# Terraform directories and state
-.terraform/
-terraform.tfstate
-terraform.tfstate.*
 **/.env
 .DS_Store
 npm-debug.log*
@@ -14,4 +10,9 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 ecommerce-app.zip
-
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+.terraform.tfstate.lock.info
