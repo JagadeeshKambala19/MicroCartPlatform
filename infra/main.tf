@@ -79,8 +79,6 @@ module "ecs" {
 
     DB_HOST     = module.rds.db_endpoint
     DB_NAME     = module.rds.db_name
-    DB_USER     = var.db_username
-    DB_PASSWORD = var.db_password
   }
 }
 
