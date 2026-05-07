@@ -72,3 +72,17 @@ variable "target_group_arn" {
   description = "ALB target group ARN"
   type        = string
 }
+variable "min_capacity" {
+  type    = number
+  default = 1
+}
+
+variable "max_capacity" {
+  type    = number
+  default = 4
+}
+
+variable "cpu_target_value" {
+  type    = number
+  default = 60
+}
