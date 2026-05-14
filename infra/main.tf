@@ -64,11 +64,6 @@ module "ecs" {
   project_name = "microcart"
   environment  = "dev"
 
-  min_capacity   = 1
-max_capacity   = 4
-
-cpu_target_value = 60
-
   vpc_id             = module.vpc.vpc_id
   private_subnet_ids = module.vpc.private_subnet_ids
 
